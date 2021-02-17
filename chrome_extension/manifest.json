@@ -1,7 +1,7 @@
 {  
     "manifest_version": 2,  
-    "name": "mytypings",  
-    "description": "Extension for mytypings.com",  
+    "name": "Stappaot",  
+    "description": "Extension for online attendance",  
     "version": "1.0",  
     "browser_action": {  
      "default_icon": "logo.png",  
