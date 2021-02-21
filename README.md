@@ -11,4 +11,4 @@
 6) pip3 install pyrebase
 7) pip install mysql-connector-python
 8) pip3 install streamlit
-9) To run the code: streamlit run stapp.py
+9) To run the code, go to terminal and type: streamlit run stapp.py
