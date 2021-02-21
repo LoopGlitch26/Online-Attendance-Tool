@@ -6,10 +6,10 @@
   
   1) Setup virtual environment -- `virtualenv env` -- [Source](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
   2) Activate virtual environment -- `.\env\Scripts\activate`
-  3) `pip install dlib`
-  5) `pip3 install face_recognition`
-5) `pip3 install opencv-python`
+  3) `pip install dlib` or `conda install -c conda-forge dlib`
+  5) `pip3 install face_recognition` or `conda install -c conda-forge face_recognition`
+5) `pip3 install opencv-python` or `conda install -c conda-forge opencv`
 6) `pip3 install pyrebase`
 7) `pip install mysql-connector-python`
-8) `pip3 install streamlit`
+8) `pip3 install streamlit` or `conda install -c conda-forge streamlit`
 9) `streamlit run stapp.py`
