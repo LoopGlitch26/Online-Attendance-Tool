@@ -13,3 +13,8 @@
 7) `pip install mysql-connector-python`
 8) `pip3 install streamlit` or `conda install -c conda-forge streamlit`
 9) `streamlit run stapp.py`
+
+Demo:
+
+![WhatsApp Image 2021-02-23 at 1 42 36 AM](https://user-images.githubusercontent.com/53336715/108764388-6256ab00-7507-11eb-9d2b-e6f2825d19a6.jpeg)
+
