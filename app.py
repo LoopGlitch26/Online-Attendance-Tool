@@ -8,7 +8,7 @@
  # and is particularly suited for sharing insights gained from data.
 
 
- # pip install dash==1.19.0
+ # Create virtual environment -> pip install pandas, pip install dash
 
 import dash
 import dash_html_components as html
@@ -19,7 +19,7 @@ from dash.dependencies import Input, Output
 
 # Load data
 df = pd.read_csv('data/data.csv', index_col=0, parse_dates=True)
-df.index = pd.to_datetime(df['Date'])
+df.index = pd.to_datetime(df['datetime'])
 
 # Initialize the app
 app = dash.Dash(__name__)
@@ -41,13 +41,13 @@ app.layout = html.Div(
                     html.Div(className='four columns div-user-controls',
                              children=[
                                  html.H2('Stappaot - Online Attendance Capturing Tool'),
-                                 html.P('Visualising Attendance with Plotly - Dash.'),
+                                 html.P('Dashboard of overall Attendance of the class'),
                                  html.P('Pick one or more Class from the dropdown below.'),
                                  html.Div(
                                      className='div-for-dropdown',
                                      children=[
-                                         dcc.Dropdown(id='stockselector', options=get_options(df['stock'].unique()),
-                                                      multi=True, value=[df['stock'].sort_values()[0]],
+                                         dcc.Dropdown(id='attendance', options=get_options(df['classID'].unique()),
+                                                      multi=True, value=[df['classID'].sort_values()[0]],
                                                       style={'backgroundColor': '#1E1E1E'},
                                                       className='stockselector'
                                                       ),
@@ -67,13 +67,13 @@ app.layout = html.Div(
 
 # Callback for timeseries price
 @app.callback(Output('timeseries', 'figure'),
-              [Input('stockselector', 'value')])
+              [Input('attendance', 'value')])
 def update_graph(selected_dropdown_value):
     trace1 = []
     df_sub = df
     for stock in selected_dropdown_value:
-        trace1.append(go.Scatter(x=df_sub[df_sub['stock'] == stock].index,
-                                 y=df_sub[df_sub['stock'] == stock]['value'],
+        trace1.append(go.Scatter(x=df_sub[df_sub['classID'] == stock].index,
+                                 y=df_sub[df_sub['classID'] == stock]['value'],
                                  mode='lines',
                                  opacity=0.7,
                                  name=stock,
