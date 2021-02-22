@@ -1,6 +1,8 @@
 # Online-attendance-tool
 
 <updated> Head over to [chrome_extension](https://github.com/LoopGlitch26/Online-attendance-tool/tree/chrome_extension) branch for Chrome Extension installation on local system instructions
+ 
+<updated> Head over to [dashboard](https://github.com/LoopGlitch26/Online-attendance-tool/tree/dashboard) branch to view the dashboard for overall attendance of students
   
   ## To use the streamlit code:
   
