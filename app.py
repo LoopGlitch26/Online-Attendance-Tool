@@ -65,7 +65,7 @@ app.layout = html.Div(
 )
 
 
-# Callback for timeseries price
+# Callback for timeseries attendance
 @app.callback(Output('timeseries', 'figure'),
               [Input('attendance', 'value')])
 def update_graph(selected_dropdown_value):
