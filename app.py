@@ -25,6 +25,7 @@ df.index = pd.to_datetime(df['datetime'])
 app = dash.Dash(__name__)
 app.config.suppress_callback_exceptions = True
 
+server = app.server
 
 def get_options(list_stocks):
     dict_list = []
