@@ -1,4 +1,4 @@
-import streamlit as st, mysql.connector, cv2
+import streamlit as st ,mysql.connector,cv2
 import os
 import PIL.Image
 from PIL.Image import Image
@@ -13,7 +13,6 @@ Email=st.text_input("Email")
 reg =st.text_input("Registration Number")
 known_img=st.file_uploader("Upload Image", type=["png","jpg","jpeg"])
 
-
 def convertToBinaryData(filename):
     # Convert digital data to binary format
     with open(filename, 'rb') as file:
@@ -21,16 +20,15 @@ def convertToBinaryData(filename):
     return binaryData
 
 def insertBLOB(reg_num, Name, Email, Photo):
-    mydb = mysql.connector.connect(host="sql12.freemysqlhosting.net", database="sql12396097", user="sql12396097", password="cfjfrv3qcA")
+    mydb = mysql.connector.connect(host="localhost", database="giraffe", user="root", password="1234")
     my_cursor = mydb.cursor()
-    sql_insert_blob_query = "INSERT INTO registration (reg, name, email, photo) VALUES (%s,%s,%s,%s)"
+    sql_insert_blob_query = "INSERT INTO registration (Reg, NAME, EMAIL, Photo) VALUES (%s,%s,%s,%s)"
     empPicture = convertToBinaryData(Photo)
     # Convert data into tuple format
     insert_blob_tuple = (reg_num, Name, Email, Photo)
     result = my_cursor.execute(sql_insert_blob_query, insert_blob_tuple)
     mydb.commit()
     print("Image inserted successfully as a BLOB into students table", result)
-
 
 def save_uploadedfile(uploadedfile):
     with open(os.path.join("temp", uploadedfile.name), "wb") as f:
@@ -39,5 +37,7 @@ def save_uploadedfile(uploadedfile):
     insertBLOB(reg, Name, Email, 'temp/{}'.format(uploadedfile.name)) # Calls function to insert the photo and details into SQL
     return st.success("Successfully Registered")
 
-save_uploadedfile(known_img)
+if(known_img!=None):
+    save_uploadedfile(known_img)
+
 
