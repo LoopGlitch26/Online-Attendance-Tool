@@ -89,9 +89,11 @@ def insertBLOB(reg, name, email, classID, Date, start_time, att):
     mydb.commit()
     print("Entry updated successfully in Attendance table")
 
-
-insertBLOB(reg, name, email, classID, today_date, start_time, att)
-st.success("Successfully Inserted")
+try:
+    insertBLOB(reg, name, email, classID, today_date, start_time, att)
+    st.success("Successfully Inserted")
+except:
+    st.warning("Enter your details")
 
 cap.release()
 cv2.destroyAllWindows()
