@@ -3,9 +3,25 @@ from datetime import datetime
 import datetime
 from PIL import Image
 
-# Create an encoding for the known image of the student
-known_image = face_recognition.load_image_file("/Users/loopglitch/Desktop/me.jpg")
-original_encoding = face_recognition.face_encodings(known_image)[0]
+k=os.path.exists("temp")
+if(k==False):
+    os.mkdir("temp")
+
+def write_file(data, filename):
+    with open(filename, 'wb') as file:
+        file.write(data)
+
+def readBLOB(reg, filename):
+    print("Reading BLOB image data from registration table")
+    connection = mysql.connector.connect(host='localhost', database='giraffe', user='root', password='1234')
+    cursor = connection.cursor()
+    sql_fetch_blob_query = "SELECT Photo FROM registration WHERE Reg = %s"
+    cursor.execute(sql_fetch_blob_query, (reg,))
+    image = cursor.fetchone()[0]
+    write_file(image, filename)
+    cursor.close()
+    connection.close()
+
 
 st.header("Student Companion for Attendance")
 name=st.text_input("Enter your Name")
@@ -17,24 +33,32 @@ now = datetime.datetime.now()
 start_time = now.strftime("%H:%M")
 reg=st.text_input("Enter registration ID")
 
-capture_frequency=10 #Intervals of frame capture in seconds
+# Read and extract image from student registration database
+readBLOB(reg, "temp\\me.jpg")
+
+# Code to take known image from Offline System directory
+# Create an encoding for the known image of the student
+
+known_image = face_recognition.load_image_file("temp\\me.jpg")
+original_encoding = face_recognition.face_encodings(known_image)[0]
+
+capture_frequency=10 # Intervals of frame capture in seconds
 cap = cv2.VideoCapture(0)# Set webcam as video capture device
 i=1;FaceFound=0 # intitialise variables for counters
 TotalPictures=int(min*60/capture_frequency)# Calculate total frames captured in a given duration
-threshold=int(round(0.7*TotalPictures)) #Keeping threshold at 70%
+threshold=int(round(0.7*TotalPictures)) # Keeping threshold at 70%
 flag=0
 
 while (cap.isOpened() and i<=min*60/capture_frequency):
     ret, frame = cap.read()
     if ret == False:
         break
-    img_path = '/Users/loopglitch/aot/img_folder/unknown' + str(i) + '.jpg'
+    img_path = 'temp\\unknown' + str(i) + '.jpg'
     cv2.imwrite(img_path, frame)
 
     image = face_recognition.load_image_file(img_path)
     face_locations = face_recognition.face_locations(image)
-   # img = Image.open(img_path)  # To load the latest captured image from the path
-   # st.image(img, caption="Latest capture")  # display latest image
+
     if not face_locations:  # in case no face locations are returned i.e., []
         now = datetime.datetime.now()
         current_time = now.strftime("%H:%M:%S")
@@ -45,7 +69,7 @@ while (cap.isOpened() and i<=min*60/capture_frequency):
         unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
         results = face_recognition.compare_faces([original_encoding], unknown_encoding)
 
-        if (results[0] == True): # If face is successfully recognisedv
+        if (results[0] == True): # If face is successfully recognised
             now = datetime.datetime.now()
             current_time = now.strftime("%H:%M:%S")
             st.write("Student recognised at TIME ", current_time)
@@ -76,7 +100,6 @@ else:
     st.write("ABSENT")
     att="ABSENT"
 
-
 # SQL Integration
 @st.cache
 def insertBLOB(reg, name, email, classID, Date, start_time, att):
@@ -98,3 +121,7 @@ except:
 cap.release()
 cv2.destroyAllWindows()
 
+# Delete the files in temporary folder after the end of class
+filelist = [ f for f in os.listdir("temp") if f.endswith(".jpg") ]
+for f in filelist:
+    os.remove(os.path.join("temp", f))
