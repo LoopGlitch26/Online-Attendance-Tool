@@ -7,6 +7,16 @@ k=os.path.exists("temp")
 if(k==False):
     os.mkdir("temp")
 
+
+
+
+st.header("Student Companion for Attendance")
+name=st.text_input("Enter your Name")
+classID=st.text_input("Enter Course ID")
+email=st.text_input("Enter your Email")
+min =st.number_input("Enter the duration of the meeting in MINUTES", step=1.0)
+
+
 def write_file(data, filename):
     with open(filename, 'wb') as file:
         file.write(data)
@@ -22,12 +32,6 @@ def readBLOB(reg, filename):
     cursor.close()
     connection.close()
 
-
-st.header("Student Companion for Attendance")
-name=st.text_input("Enter your Name")
-classID=st.text_input("Enter Course ID")
-email=st.text_input("Enter your Email")
-min =st.number_input("Enter the duration of the meeting in MINUTES", step=1.0)
 
 now = datetime.datetime.now()
 start_time = now.strftime("%H:%M")
