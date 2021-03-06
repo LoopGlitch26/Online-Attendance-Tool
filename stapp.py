@@ -13,9 +13,9 @@ def write_file(data, filename):
 
 def readBLOB(reg, filename):
     print("Reading BLOB image data from registration table")
-    connection = mysql.connector.connect(host='localhost', database='giraffe', user='root', password='1234')
+    connection = mysql.connector.connect(host="sql12.freemysqlhosting.net", database="sql12396097", user="sql12396097", password="cfjfrv3qcA")
     cursor = connection.cursor()
-    sql_fetch_blob_query = "SELECT Photo FROM registration WHERE Reg = %s"
+    sql_fetch_blob_query = "SELECT photo FROM registration WHERE reg = %s"
     cursor.execute(sql_fetch_blob_query, (reg,))
     image = cursor.fetchone()[0]
     write_file(image, filename)
