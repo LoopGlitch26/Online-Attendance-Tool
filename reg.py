@@ -24,9 +24,9 @@ def insertBLOB(reg_num, Name, Email, Photo):
     mydb = mysql.connector.connect(host="sql12.freemysqlhosting.net", database="sql12396097", user="sql12396097", password="cfjfrv3qcA")
     my_cursor = mydb.cursor()
     sql_insert_blob_query = "INSERT INTO registration (reg, name, email, photo) VALUES (%s,%s,%s,%s)"
-    empPicture = convertToBinaryData(Photo)
+    converted_picture = convertToBinaryData(Photo)
     # Convert data into tuple format
-    insert_blob_tuple = (reg_num, Name, Email, Photo)
+    insert_blob_tuple = (reg_num, Name, Email, converted_picture)
     result = my_cursor.execute(sql_insert_blob_query, insert_blob_tuple)
     mydb.commit()
     print("Image inserted successfully as a BLOB into students table", result)
