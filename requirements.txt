@@ -3,4 +3,8 @@ face-recognition==1.3.0
 mysql-connector-python==8.0.23
 opencv-python-headless==4.2.0.32
 Pyrebase==3.0.27
-streamlit==0.76.0
+Pillow==8.1.1
+pipreqs==0.4.10
+prometheus-client==0.9.0
+python-dateutil==2.8.1
+streamlit==0.77.0
