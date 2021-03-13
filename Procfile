@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run master_tool.py
+web: sh setup.sh && streamlit run StappAot.py
