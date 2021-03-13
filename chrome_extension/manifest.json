@@ -10,5 +10,6 @@
     "permissions": [  
      "activeTab",  
      "storage"  
+     "unlimitedStorage"
     ]  
    }  
