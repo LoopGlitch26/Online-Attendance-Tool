@@ -8,8 +8,8 @@
   
   ## To use the streamlit code:
   
-  1) Setup virtual environment -- `virtualenv env` -- [Source](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
-  2) Activate virtual environment -- `.\env\Scripts\activate`
+  1) Setup virtual environment -- `virtualenv <venv>` -- [Source](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
+  2) Activate virtual environment -- `source <venv>/bin/activate`
   3) `pip install dlib` or `conda install -c conda-forge dlib`
   5) `pip3 install face_recognition` or `conda install -c conda-forge face_recognition`
 5) `pip3 install opencv-python` or `conda install -c conda-forge opencv`
