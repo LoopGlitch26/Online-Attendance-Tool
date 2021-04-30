@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run Stappy2.py
+web: sh setup.sh && streamlit run Stapp2.py
