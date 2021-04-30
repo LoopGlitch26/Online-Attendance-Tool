@@ -389,6 +389,7 @@ else:
         # Code to take known image from Offline System directory
         # Create an encoding for the known image of the student
         known_image = face_recognition.load_image_file("temp\\me.jpg")
+        time.sleep(6)
         original_encoding = face_recognition.face_encodings(known_image)[0]
 
         capture_frequency = 10  # Intervals of frame capture in seconds
