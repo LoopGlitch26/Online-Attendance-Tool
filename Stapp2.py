@@ -2,7 +2,7 @@
 
 import streamlit as st, mysql.connector
 
-st.title("Welcome to StappAot")
+st.title("Welcome")
 import streamlit as st
 
 add_selectbox = st.sidebar.selectbox(
@@ -37,7 +37,7 @@ if(add_selectbox=="Student Registration"):
 
 
         def insertBLOB(reg_num, Name, Email, Photo, password):
-            mydb = mysql.connector.connect(host="sql12.freemysqlhosting.net", database="sql12396097", user="sql12396097", password="cfjfrv3qcA")
+            mydb = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
             my_cursor = mydb.cursor()
             sql_insert_blob_query = "INSERT INTO registration (Reg, NAME, EMAIL, Photo, password) VALUES (%s,%s,%s,%s,%s)"
             converted_picture = convertToBinaryData(Photo)
@@ -79,7 +79,7 @@ elif(add_selectbox=="Faculty Registration"):
         idx = subject_config.index(classID)
         classID = subject_ID[idx]
         def facultyregistration(Reg, Name, Email, Password, Subject):
-            mydb = mysql.connector.connect(host="sql12.freemysqlhosting.net", database="sql12396097", user="sql12396097", password="cfjfrv3qcA")
+            mydb = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
             my_cursor = mydb.cursor()
             sql_insert_blob_query = "INSERT INTO facultyreg (Reg, Name, Email,Password, Subject) VALUES (%s,%s,%s,%s,%s)"
             insert_blob_tuple = (Reg, Name, Email,Password, Subject)
@@ -104,7 +104,7 @@ elif(add_selectbox=="Student Dashboard"):
 
 
     def password_validate(password):
-        connection = mysql.connector.connect(host='sql12.freemysqlhosting.net', database='sql12396097', user='sql12396097', password='cfjfrv3qcA')
+        connection = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
         cursor = connection.cursor()
         sql_validate = "select password FROM registration where Reg={}".format(reg)
         cursor.execute(sql_validate)
@@ -113,7 +113,7 @@ elif(add_selectbox=="Student Dashboard"):
 
 
     def findstudent(reg):
-        connection = mysql.connector.connect(host='sql12.freemysqlhosting.net', database='sql12396097', user='sql12396097', password='cfjfrv3qcA')
+        connection = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
         cursor = connection.cursor()
         sql_validate = "select NAME FROM registration where Reg={}".format(reg)
         cursor.execute(sql_validate)
@@ -124,7 +124,7 @@ elif(add_selectbox=="Student Dashboard"):
 
 
     def findattendance1(reg, subject_num):
-        connection = mysql.connector.connect(host='sql12.freemysqlhosting.net', database='sql12396097', user='sql12396097', password='cfjfrv3qcA')
+        connection = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
         cursor = connection.cursor()
         sql_attendance_subject = "select * from `{subject}` where reg={registration}".format(subject=subject_num,
                                                                                              registration=reg)
@@ -177,7 +177,7 @@ elif(add_selectbox=="Faculty Dashboard"):
 
     # -----------------Validate Password------------------------------------------------------------------
     def password_validate(password):
-        connection = mysql.connector.connect(host='sql12.freemysqlhosting.net', database='sql12396097', user='sql12396097', password='cfjfrv3qcA')
+        connection = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
         cursor = connection.cursor()
         sql_validate = "select Password FROM facultyreg where Reg={}".format(reg)
         cursor.execute(sql_validate)
@@ -189,7 +189,7 @@ elif(add_selectbox=="Faculty Dashboard"):
 
     # ----------------------Find Student Name--------------------------------------------------------------
     def findstudent(reg):
-        connection = mysql.connector.connect(host='sql12.freemysqlhosting.net', database='sql12396097', user='sql12396097', password='cfjfrv3qcA')
+        connection = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
         cursor = connection.cursor()
         sql_validate = "select NAME FROM registration where Reg={}".format(reg)
         cursor.execute(sql_validate)
@@ -203,7 +203,7 @@ elif(add_selectbox=="Faculty Dashboard"):
 
     # -------------------------------Finding Faculty and their subject---------------------------------------
     def find_faculty_and_subject(reg):
-        connection = mysql.connector.connect(host='sql12.freemysqlhosting.net', database='sql12396097', user='sql12396097', password='cfjfrv3qcA')
+        connection = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
         cursor = connection.cursor()
         sql_validate = "select Name, Subject FROM facultyreg where Reg={}".format(reg)
         cursor.execute(sql_validate)
@@ -219,7 +219,7 @@ elif(add_selectbox=="Faculty Dashboard"):
 
     # ----------------------------Find All students' attendance-----------------------------------------------
     def findattendance(subject_num):
-        connection = mysql.connector.connect(host='sql12.freemysqlhosting.net', database='sql12396097', user='sql12396097', password='cfjfrv3qcA')
+        connection = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
         cursor = connection.cursor()
         sql_attendance_subject = "select * from `{subject}`".format(subject=subject_num)
         cursor.execute(sql_attendance_subject)
@@ -233,7 +233,7 @@ elif(add_selectbox=="Faculty Dashboard"):
     # ----------------------------------------------------------------------------------------------------------
 
     def findattendancepercent(reg, subject_num):
-        connection = mysql.connector.connect(host='sql12.freemysqlhosting.net', database='sql12396097', user='sql12396097', password='cfjfrv3qcA')
+        connection = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
         cursor = connection.cursor()
         sql_attendance_subject = "select * from `{subject}` where reg={registration}".format(subject=subject_num,
                                                                                              registration=reg)
@@ -313,7 +313,7 @@ else:
     # --------- Extract Photo-------------------------------------------------------------------------
     def readBLOB(reg, filename):
         print("Reading BLOB image data from registration table")
-        connection = mysql.connector.connect(host='sql12.freemysqlhosting.net', database='sql12396097', user='sql12396097', password='cfjfrv3qcA')
+        connection = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
         cursor = connection.cursor()
         sql_fetch_blob_query = "SELECT Photo FROM registration WHERE Reg = %s"
         cursor.execute(sql_fetch_blob_query, (reg,))
@@ -325,7 +325,7 @@ else:
 
     # ------------------------------ Validate Student------------------------------------------------------------
     def findstudent(reg):
-        connection = mysql.connector.connect(host='sql12.freemysqlhosting.net', database='sql12396097', user='sql12396097', password='cfjfrv3qcA')
+        connection = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
         cursor = connection.cursor()
         sql_validate = "select NAME, EMAIL FROM registration where Reg={}".format(reg)
         cursor.execute(sql_validate)
@@ -342,7 +342,7 @@ else:
         from datetime import datetime, timedelta
         d = datetime.today() - timedelta(days=1)
         yesterday_date = str(d.strftime("%d-%m-%Y"))
-        connection = mysql.connector.connect(host='sql12.freemysqlhosting.net', database='sql12396097', user='sql12396097', password='cfjfrv3qcA')
+        connection = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
         cursor = connection.cursor()
         sql_find_attendance = "select `{date}` from `{subject}` where Reg={registration}".format(date=yesterday_date,
                                                                                                  subject=subject_num,
@@ -468,7 +468,7 @@ else:
         # SQL Integration
 
         def insertBLOB(Reg, today_date, att, subject_num):
-            mydb = mysql.connector.connect(host="sql12.freemysqlhosting.net", database="sql12396097", user="sql12396097", password="cfjfrv3qcA")
+            mydb = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
             my_cursor = mydb.cursor()
             try:
                 # To insert a row into the table with reg no. as primary key
