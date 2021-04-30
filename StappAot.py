@@ -3,17 +3,17 @@ import streamlit as st, mysql.connector, cv2, os, face_recognition, time, re, sy
 from PIL.Image import Image
 
 st.title("Welcome")
-# ------------------Subject Config-------------------------------------
+# ---------------------------Subject Config------------------------------
 subject_ID = ['subject1', 'subject2', 'subject3', 'subject4', 'subject5']
 subject_config = ['MTH1001', 'CSE1001', 'EET1001', 'CHM1001', 'ENG1001']
-# ------------------Subject Config--------------------------------------
+# ---------------------------Subject Config------------------------------
 
 # Navigation toolbar to go to pages
 add_selectbox = st.sidebar.selectbox(
     "NAVIGATION",  # Title of sidebar
     (
-        "Student Registration", "Faculty Registration", "Student Dashboard", "Faculty Dashboard",
-        "Attendance Capture Tool")
+        "Student Registration", "Faculty Registration", "Student Dashboard", "Faculty Dashboard", "Attendance Capture Tool"
+    )
     # List of all options in sidebar
 )
 
@@ -23,10 +23,10 @@ def CreateTempDir():
     if not k:
         os.mkdir("temp")
 
-# ---------------------------------------------
+# ----------------------------------------------
 CreateTempDir()
 
-# -------------------Validate Email, Name, RegistrationID---------------------------
+# -----------------------Validate Email, Name, RegistrationID---------------------------
 
 def email_check(email):
     regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@](\w+[.]\w{2,3}$)|(\w+[.]\w+[.]\w{2,3}$)'
@@ -48,14 +48,14 @@ def reg_check(reg):
         return True
     else:
         return False
-# -------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
 
-# ++++++++++++++++++++STUDENT REGISTRATION+++++++++++++++++++++++++++++++
+# ++++++++++++++++++++++++++++++++STUDENT REGISTRATION++++++++++++++++++++++++++++++++++
 
 if add_selectbox == "Student Registration":
     st.header("Student Registration")
 
-    # ------------Input fields--------------------------------------------
+    # ---------------------------------Input fields-------------------------------------
     Name = st.text_input("Name")
     Email = st.text_input("Email")
     reg = st.text_input("Registration Number")
@@ -64,7 +64,7 @@ if add_selectbox == "Student Registration":
     if password != password_check:  # Check whether the entered passwords match
         st.warning("Passwords don't match")
 
-    # Email Verification------------------------------------------------------
+    # ------------------------------Email Verification----------------------------------
     import pyrebase, time, streamlit as st
 
     firebaseConfig = {
@@ -115,10 +115,10 @@ if add_selectbox == "Student Registration":
             st.success('You have successfully verified your email')
 
 
-    #-------------------------------------------------------------------------------
+    #-----------------------------------------------------------------------------------
 
     known_img = st.file_uploader("Upload Image", type=["png", "jpg", "jpeg"])
-    # ------------ Input fields---------------------------------------------
+    #----------------------------------- Input fields-----------------------------------
     if st.button("Submit") and password == password_check and isemailverified():
         if not name_check(Name):
             st.warning("Invalid Name")
@@ -138,18 +138,18 @@ if add_selectbox == "Student Registration":
         else:
             st.balloons()
 
-        # ------Convert digital data to binary format----------
+        # ---------Convert digital data to binary format----------
         def convertToBinaryData(filename):
             with open(filename, 'rb') as file:
                 binaryData = file.read()
             return binaryData
 
 
-        # ------------------------------------------------------
+        # --------------------------------------------------------
 
-        # --------------------------------------------SQL Code to insert data------------------------------------------
+        # --------------------------------------------SQL Code to insert data--------------------------------------------
         def insertBLOB(reg_num, Name, Email, Photo, password):
-            mydb = mysql.connector.connect(host="localhost", database="giraffe", user="root", password="1234")
+            mydb = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
             my_cursor = mydb.cursor()
             sql_insert_blob_query = "INSERT INTO registration (Reg, NAME, EMAIL, Photo, password) VALUES (%s,%s,%s,%s,%s)"
             converted_picture = convertToBinaryData(Photo)
@@ -160,7 +160,7 @@ if add_selectbox == "Student Registration":
             print("Image inserted successfully as a BLOB into students table", result)
 
 
-        # ------------------------------------------SQL Code to Insert Data--------------------------------------------
+        # --------------------------------------------SQL Code to Insert Data--------------------------------------------
 
         # --------- Pass the uploaded file through streamlit to SQL----------------
         def save_uploadedfile(uploadedfile):
@@ -214,7 +214,7 @@ elif add_selectbox == "Faculty Registration":
 
         # -------------------------------SQL Code for faculty registration--------------------------------------------
         def facultyregistration(Reg, Name, Email, Password, Subject):
-            mydb = mysql.connector.connect(host="localhost", database="giraffe", user="root", password="1234")
+            mydb = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
             my_cursor = mydb.cursor()
             sql_insert_blob_query = "INSERT INTO facultyreg (Reg, Name, Email,Password, Subject) VALUES (%s,%s,%s,%s,%s)"
             insert_blob_tuple = (Reg, Name, Email, Password, Subject)
@@ -243,7 +243,7 @@ elif add_selectbox == "Student Dashboard":
 
     # --------- Extract password from student registration database-------------------
     def password_validate(password):
-        connection = mysql.connector.connect(host='localhost', database='giraffe', user='root', password='1234')
+        connection = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
         cursor = connection.cursor()
         sql_validate = "select password FROM registration where Reg={}".format(reg)
         cursor.execute(sql_validate)
@@ -255,7 +255,7 @@ elif add_selectbox == "Student Dashboard":
 
     # --------------Extract student name from registration database-------------------------------------------
     def findstudent(reg):
-        connection = mysql.connector.connect(host='localhost', database='giraffe', user='root', password='1234')
+        connection = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
         cursor = connection.cursor()
         sql_validate = "select NAME FROM registration where Reg={}".format(reg)
         cursor.execute(sql_validate)
@@ -265,11 +265,11 @@ elif add_selectbox == "Student Dashboard":
             st.write("Name:", x[0])
 
 
-    # -------------Extract student name from registration database-----------------------------------------
+    # -------------Extract student name from registration database-------------------------------------------
 
-    # --------------Find attendance for a given reg no. ------------------------------------------------------
+    # --------------Find attendance for a given reg no. -----------------------------------------------------
     def findattendance1(reg, subject_num):
-        connection = mysql.connector.connect(host='localhost', database='giraffe', user='root', password='1234')
+        connection = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
         cursor = connection.cursor()
         sql_attendance_subject = "select * from `{subject}` where reg={registration}".format(subject=subject_num,
                                                                                              registration=reg)
@@ -319,7 +319,7 @@ elif add_selectbox == "Faculty Dashboard":
 
     # -----------------Validate Password------------------------------------------------------------------
     def password_validate(password):
-        connection = mysql.connector.connect(host='localhost', database='giraffe', user='root', password='1234')
+        connection = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
         cursor = connection.cursor()
         sql_validate = "select Password FROM facultyreg where Reg={}".format(reg)
         cursor.execute(sql_validate)
@@ -331,7 +331,7 @@ elif add_selectbox == "Faculty Dashboard":
 
     # ----------------------Find Student Name--------------------------------------------------------------
     def findstudent(reg):
-        connection = mysql.connector.connect(host='localhost', database='giraffe', user='root', password='1234')
+        connection = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
         cursor = connection.cursor()
         sql_validate = "select NAME FROM registration where Reg={}".format(reg)
         cursor.execute(sql_validate)
@@ -345,7 +345,7 @@ elif add_selectbox == "Faculty Dashboard":
 
     # -------------------------------Finding Faculty and their subject---------------------------------------
     def find_faculty_and_subject(reg):
-        connection = mysql.connector.connect(host='localhost', database='giraffe', user='root', password='1234')
+        connection = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
         cursor = connection.cursor()
         sql_validate = "select Name, Subject FROM facultyreg where Reg={}".format(reg)
         cursor.execute(sql_validate)
@@ -362,7 +362,7 @@ elif add_selectbox == "Faculty Dashboard":
 
     # ----------------------------Find All students' attendance-----------------------------------------------
     def findattendance(subject_num):
-        connection = mysql.connector.connect(host='localhost', database='giraffe', user='root', password='1234')
+        connection = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
         cursor = connection.cursor()
         sql_attendance_subject = "select * from `{subject}`".format(subject=subject_num)
         cursor.execute(sql_attendance_subject)
@@ -377,7 +377,7 @@ elif add_selectbox == "Faculty Dashboard":
 
     # ------------------------Find attendance for each student with percentage-------------------------------
     def findattendancepercent(reg, subject_num):
-        connection = mysql.connector.connect(host='localhost', database='giraffe', user='root', password='1234')
+        connection = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
         cursor = connection.cursor()
         sql_attendance_subject = "select * from `{subject}` where reg={registration}".format(subject=subject_num,
                                                                                              registration=reg)
@@ -454,10 +454,10 @@ else:
 
 
     # Code to extract image from student registration database
-    # --------- Extract Photo-------------------------------------------------------------------------
+    # ------------------------------------------------------------ Extract Photo-----------------------------------------------------------
     def readBLOB(reg, filename):
         print("Reading BLOB image data from registration table")
-        connection = mysql.connector.connect(host='localhost', database='giraffe', user='root', password='1234')
+        connection = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
         cursor = connection.cursor()
         sql_fetch_blob_query = "SELECT Photo FROM registration WHERE Reg = %s"
         cursor.execute(sql_fetch_blob_query, (reg,))
@@ -467,9 +467,9 @@ else:
         connection.close()
 
 
-    # ------------------------------ Validate Student------------------------------------------------------------
+    # ----------------------------------------------------------- Validate Student---------------------------------------------------------
     def findstudent(reg):
-        connection = mysql.connector.connect(host='localhost', database='giraffe', user='root', password='1234')
+        connection = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
         cursor = connection.cursor()
         sql_validate = "select NAME, EMAIL FROM registration where Reg={}".format(reg)
         cursor.execute(sql_validate)
@@ -480,7 +480,7 @@ else:
             st.write("Email:", x[1])
 
 
-    # -----------------------------Student Regularity Check---------------------------------------------------
+    # --------------------------------------------------------Student Regularity Check-----------------------------------------------------
     # Checks whether the student was present in the previous class
     def isregular(reg, subject_num):
         from datetime import datetime, timedelta
@@ -497,7 +497,7 @@ else:
             return x[0]  # returns '1' or '0'
 
 
-    # -----------------------------------------------------------------------------------------------------------
+    # -------------------------------------------------------------------------------------------------------------------------------------
 
     st.header("Student Companion for Attendance")
     classID = st.selectbox("Select your subject", subject_config)
@@ -598,7 +598,7 @@ else:
 
         # SQL Integration
         def insertBLOB(Reg, today_date, att, subject_num):
-            mydb = mysql.connector.connect(host="localhost", database="giraffe", user="root", password="1234")
+            mydb = mysql.connector.connect(host="sql6.freemysqlhosting.net", database="sql6409330", user="sql6409330", password="dvjW6YhuvB")
             my_cursor = mydb.cursor()
             try:
                 # To insert a row into the table with reg no. as primary key
@@ -630,3 +630,33 @@ else:
         # Close the webcam
         cap.release()
         cv2.destroyAllWindows()
+
+        
+        
+        #-----------------------------DATABASE DATA------------------------------
+        # Server: sql6.freemysqlhosting.net
+        # Name: sql6409330
+        # Username: sql6409330
+        # Password: dvjW6YhuvB
+        # Port number: 3306
+        #------------------------------------------------------------------------
+        
+        #+++++++++++++++++++++++++++++++SQL QUERIES++++++++++++++++++++++++++++++
+        # To create a table for faculty registration
+        # create table facultyreg (Reg INT NOT NULL PRIMARY KEY, Name varchar(30) NOT NULL, Email varchar(30) NOT NULL, Password varchar(30) NOT NULL, Subject varchar(20));
+
+        # To create a table for student registration
+        # create table registration (Reg INT NOT NULL PRIMARY KEY, NAME varchar(30) NOT NULL, EMAIL varchar(30) NOT NULL,Photo LONGBLOB, password varchar(30) NOT NULL);
+
+        # To create a table for each subject
+        # create table subject1 (Reg INT NOT NULL PRIMARY KEY); 
+        # create table subject2 (Reg INT NOT NULL PRIMARY KEY); 
+        # create table subject3 (Reg INT NOT NULL PRIMARY KEY); 
+        # create table subject4 (Reg INT NOT NULL PRIMARY KEY); 
+        # create table subject5 (Reg INT NOT NULL PRIMARY KEY);
+        # INSERT INTO subject1 VALUES (0)
+        # INSERT INTO subject2 VALUES (0)
+        # INSERT INTO subject3 VALUES (0)
+        # INSERT INTO subject4 VALUES (0)
+        # INSERT INTO subject5 VALUES (0)
+        #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
