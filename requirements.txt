@@ -8,3 +8,15 @@ pipreqs==0.4.10
 prometheus-client==0.9.0
 python-dateutil==2.8.1
 streamlit==0.77.0
+
+
+click==6.7
+Flask==1.1.2
+numpy==1.20.1
+Dlib==19.21.1
+opencv-python==4.5.1.48
+itsdangerous==0.24
+Jinja2>=2.10.1
+MarkupSafe==1.0
+Werkzeug>=0.15
+imutils==0.5.3
