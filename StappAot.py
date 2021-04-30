@@ -116,8 +116,11 @@ if add_selectbox == "Student Registration":
 
 
     #-----------------------------------------------------------------------------------
-
-    known_img = st.file_uploader("Upload Image", type=["png", "jpg", "jpeg"])
+    @st.cache(suppress_st_warning=True)
+    def img_up():
+        known_img = st.file_uploader("Upload Image", type=["png", "jpg", "jpeg"])
+        
+    img_up()
     #----------------------------------- Input fields-----------------------------------
     if st.button("Submit") and password == password_check and isemailverified():
         if not name_check(Name):
