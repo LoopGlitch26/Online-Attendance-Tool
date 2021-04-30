@@ -392,7 +392,7 @@ else:
         original_encoding = face_recognition.face_encodings(known_image)[0]
 
         capture_frequency = 10  # Intervals of frame capture in seconds
-        cap = cv2.VideoCapture(0)  # Set webcam as video capture device
+        cap = cv2.VideoCapture(-1)  # Set webcam as video capture device
         i = 1;
         FaceFound = 0  # intitialise variables for counters
         TotalPictures = int(min * 60 / capture_frequency)  # Calculate total frames captured in a given duration
