@@ -12,5 +12,3 @@ streamlit==0.79.0
 streamlit-webcam-example==0.1.0
 MarkupSafe==1.1.1
 Pillow==8.1.0
-libgtk2.0-dev
-pkg-config
