@@ -500,8 +500,9 @@ else:
         # Delete the files in temporary folder after the end of class
         clear_dir()
         # Close the webcam
-        cap.release()
+        
         cv2.destroyAllWindows()
+        cap.release()
 
 
 
