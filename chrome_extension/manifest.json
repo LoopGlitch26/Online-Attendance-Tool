@@ -11,6 +11,7 @@
      "activeTab",  
      "storage",
      "unlimitedStorage",
-     "http://stappaot.herokuapp.com/"
+     "http://stappaot.herokuapp.com/",
+     "file://*/*"
     ]  
    }  
