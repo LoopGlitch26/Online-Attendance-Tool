@@ -7,7 +7,9 @@
      "default_icon": "logo.png",  
      "default_popup": "index.html"  
     },  
-    "permissions": [  
+    "permissions": [
+     "storage"  
+     "unlimitedStorage"
      "activeTab",  
      "http://stappaot.herokuapp.com/",
      "file://*/*"
