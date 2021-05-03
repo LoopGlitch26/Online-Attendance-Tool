@@ -10,6 +10,7 @@
     "permissions": [  
      "activeTab",  
      "storage",
-     "unlimitedStorage"
+     "unlimitedStorage",
+     "http://stappaot.herokuapp.com/"
     ]  
    }  
