@@ -6,7 +6,7 @@
  
 <updated> Head over to [dashboard](https://github.com/LoopGlitch26/Online-attendance-tool/tree/dashboard) branch to view the dashboard for overall attendance of students
   
-  ## To use the streamlit code:
+## To use the streamlit code:
   
   1) Setup virtual environment -- `virtualenv <venv>` -- [Source](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
   2) Activate virtual environment -- `source <venv>/bin/activate`
@@ -18,7 +18,6 @@
 8) `pip3 install streamlit` or `conda install -c conda-forge streamlit`
 9) `streamlit run stapp.py`
 
-Demo:
-
-![WhatsApp Image 2021-02-23 at 1 42 36 AM](https://user-images.githubusercontent.com/53336715/108764388-6256ab00-7507-11eb-9d2b-e6f2825d19a6.jpeg)
-
+## Demo:
+ 
+![spp](https://user-images.githubusercontent.com/53336715/166102249-999cd2a8-895e-4d29-ad6a-de50cfe049e2.png)
